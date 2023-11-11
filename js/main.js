@@ -314,7 +314,7 @@ document.getElementById('resume').addEventListener('click', function () {
 // Open alert history
 document.getElementById('history').addEventListener('click', function () {
   pause = true;
-  document.getElementById('alert-history').classList.toggle('show')
+  document.getElementById('alert-history').classList.add('show')
   document.querySelector('.alert-history .layout').classList.add('show')
 });
 
