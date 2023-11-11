@@ -313,18 +313,9 @@ document.getElementById('resume').addEventListener('click', function () {
 
 // Open alert history
 document.getElementById('history').addEventListener('click', function () {
-  let allBlocks = document.querySelectorAll('.memory-game-blocks .game-block');
-
   pause = true;
-
   document.getElementById('alert-history').classList.toggle('show')
   document.querySelector('.alert-history .layout').classList.add('show')
-
-  allBlocks.forEach(block => {
-    block.querySelector('.front').style.opacity = '.5';
-  })
-
-  blocksContainer.style.pointerEvents = 'none';
 });
 
 // Close alert history
@@ -333,13 +324,6 @@ document.addEventListener('click', (e) => {
     pause = false;
     document.querySelector('.alert-history').classList.remove('show');
     document.querySelector('.alert-history .layout').classList.remove('show');
-
-    allBlocks.forEach(block => {
-      block.querySelector('.front').style.opacity = '1';
-    })
-
-    blocksContainer.style.pointerEvents = 'all';
-
   }
 })
 
