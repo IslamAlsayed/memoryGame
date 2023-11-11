@@ -14,7 +14,6 @@ body {
   width: 600px;
   padding: 20px;
   margin: auto;
-  /* position: relative; */
 }
 
 .control-buttons {
@@ -124,6 +123,24 @@ body {
 .info-container>div {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 767px) {
+  .info-container {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 425px) {
+  .info-container {
+    font-size: 12px;
+  }
+
+  .info-container .info-btn {
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 12px;
+  }
 }
 
 .memory-game-blocks {
@@ -357,6 +374,33 @@ body {
   margin: 10px auto 0;
   pointer-events: none;
   background: #f6f6f6;
+}
+
+@media (max-width: 425px) {
+
+  .alert-history .layout .table .thead,
+  .alert-history .layout .table .tbody .user {
+    height: 30px;
+    grid-template-columns: 30px 1fr 1fr 1fr;
+  }
+
+  .alert-history .layout .table .tbody .user>span:first-child {
+    line-height: 30px;
+  }
+
+  .alert-history .layout .table .tfoot .reset {
+    margin: 10px auto 0;
+  }
+
+  .alert-history .layout {
+    width: calc(300px - 40px);
+    font-size: 10px;
+  }
+
+  .alert-history .layout .table .tfoot .reset {
+    height: 30px;
+    line-height: 30px;
+  }
 }
 
 .developer {

@@ -394,7 +394,6 @@ function getDateInLocalStorage() {
     reset.innerHTML += ' ' + allUsers.length;
 
     reset.addEventListener('click', () => {
-      console.log('clicked')
       if (localStorage.clear('users')) {
         document.getElementById('tbody').innerHTML = '';
         getDateInLocalStorage()
