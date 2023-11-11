@@ -324,7 +324,7 @@ document.getElementById('history').addEventListener('click', function () {
     block.querySelector('.front').style.opacity = '.5';
   })
 
-  blocksContainer.style.pointerEvents = 'all';
+  blocksContainer.style.pointerEvents = 'none';
 });
 
 // Close alert history
@@ -333,6 +333,13 @@ document.addEventListener('click', (e) => {
     pause = false;
     document.querySelector('.alert-history').classList.remove('show');
     document.querySelector('.alert-history .layout').classList.remove('show');
+
+    allBlocks.forEach(block => {
+      block.querySelector('.front').style.opacity = '1';
+    })
+
+    blocksContainer.style.pointerEvents = 'all';
+
   }
 })
 
