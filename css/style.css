@@ -5,15 +5,38 @@
 }
 
 body {
-  overflow: hidden;
   user-select: none;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+body * {
+  text-transform: capitalize;
 }
 
 .container {
   width: 600px;
   padding: 20px;
   margin: auto;
+}
+
+.btnClick:active {
+  transform: scale(0.96);
+}
+
+@media (min-width: 425px) and (max-width: 767px) {
+  .container {
+    width: 400px;
+  }
+
+  .info-container {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 424px) {
+  .container {
+    width: 100%;
+  }
 }
 
 .control-buttons {
@@ -25,8 +48,22 @@ body {
   z-index: 3;
   display: grid;
   place-content: center;
-  text-transform: capitalize;
   background: #2196f3;
+}
+
+.control-buttons .allHistory {
+  display: block;
+  width: 150px;
+  height: 40px;
+  outline: none;
+  margin: auto;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  border-radius: 3px;
+  background: #333;
+  margin-bottom: 50px;
+  border: 1px solid #fff;
 }
 
 .control-buttons .levels {
@@ -42,11 +79,12 @@ body {
   cursor: pointer;
   font-size: 22px;
   transition: .1s;
+  display: grid;
+  place-content: center;
   background: #888;
   padding: 10px 25px;
   border-radius: 7px;
   user-select: none;
-  text-align: center;
   position: relative;
   border: 2px solid #fff;
 }
@@ -87,9 +125,35 @@ body {
   background: #888;
   padding: 10px 25px;
   border-radius: 7px;
-  text-align: center;
+  display: grid;
+  place-content: center;
   pointer-events: none;
   border: 2px solid #fff;
+}
+
+@media (max-width: 424px) {
+  .control-buttons .levels {
+    gap: 10px;
+    height: 40px;
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .control-buttons .levels span {
+    font-size: 16px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+  }
+
+  .control-buttons .start-game {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    padding-block: 10px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+  }
 }
 
 .info-container {
@@ -131,7 +195,7 @@ body {
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 424px) {
   .info-container {
     font-size: 12px;
   }
@@ -151,6 +215,7 @@ body {
   justify-content: center;
 }
 
+body.stop-clicking,
 .memory-game-blocks.stop-clicking {
   pointer-events: none;
 }
@@ -186,9 +251,6 @@ body {
 }
 
 @media (max-width: 767px) {
-  .container {
-    width: 400px;
-  }
 
   .memory-game-blocks.easy .game-block {
     width: calc((100% - 15px) / 4);
@@ -211,12 +273,6 @@ body {
 
   .memory-game-blocks.hard .game-block .front::before {
     font-size: 50px;
-  }
-}
-
-@media (max-width: 424px) {
-  .container {
-    width: 100%;
   }
 }
 
@@ -294,6 +350,7 @@ body {
   top: 0;
   left: 0;
   z-index: 9;
+  overflow: hidden;
   visibility: hidden;
 }
 
@@ -330,7 +387,6 @@ body {
 .alert-history .layout .table .thead {
   font-weight: bold;
   background: #0074d0;
-  text-transform: capitalize;
 }
 
 .alert-history .layout .table .tbody {
@@ -361,7 +417,6 @@ body {
   background: #f66;
   font-weight: bold;
   margin: 50px auto 0;
-  text-transform: capitalize;
 }
 
 .alert-history .layout .table .tfoot .reset:hover {
@@ -376,7 +431,7 @@ body {
   background: #f6f6f6;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 424px) {
 
   .alert-history .layout .table .thead,
   .alert-history .layout .table .tbody .user {
@@ -393,7 +448,7 @@ body {
   }
 
   .alert-history .layout {
-    width: calc(300px - 40px);
+    width: calc(100% - 140px);
     font-size: 10px;
   }
 
@@ -407,5 +462,4 @@ body {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  text-transform: capitalize;
 }

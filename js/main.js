@@ -3,8 +3,17 @@ let startGame = document.getElementById('start-game');
 let pause = false; // is timer paused
 let gameLevel, countGameLevelBlocks;
 
+onload = () => {
+  if (localStorage.getItem('users') &&
+    JSON.parse(localStorage.getItem('users')) == '' ||
+    JSON.parse(localStorage.getItem('users')) == null) {
+    document.getElementById('allHistory').style.display = 'none';
+  }
+}
+
 let levels = document.querySelectorAll('.control-buttons .levels span');
 
+// Choose game level
 levels.forEach(level => {
   level.addEventListener('click', () => {
     levels.forEach(level => level.classList.remove('active'))
@@ -27,6 +36,7 @@ levels.forEach(level => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id == 'start-game') {
+
     // Pause countdown timer
     pause = false;
 
@@ -36,8 +46,7 @@ document.addEventListener('click', (e) => {
     // Prompt window to ask for name
     let yourName = prompt('What\'s your name?');
 
-    let start = new Audio('./sounds/start.mp3');
-    start.play();
+    new Audio('./sounds/start.mp3').play();
 
     let spanName = document.querySelector('.info-container .name span');
 
@@ -115,7 +124,6 @@ function insertBlockInContainerHTML() {
           flipBlock(block, blocks);
         })
       })
-
     })
 }
 
@@ -128,16 +136,14 @@ function flipBlock(selectedBlock, blocks) {
   let allFlippedBlocks = blocks.filter(flippedBlock => flippedBlock.classList.contains('is-flipped'));
 
   if (allFlippedBlocks.length === 2) {
-
     // Stop clicking function
-    stopClicking()
+    stopClicking();
 
     // Ckeck matched block function
-    ckeckMatchedBlocks(allFlippedBlocks[0], allFlippedBlocks[1], blocks)
+    ckeckMatchedBlocks(allFlippedBlocks[0], allFlippedBlocks[1], blocks);
 
   } else {
-    let click = new Audio('./sounds/click.mp3');
-    click.play();
+    new Audio('./sounds/click.mp3').play();
   }
 }
 
@@ -148,14 +154,13 @@ function ckeckMatchedBlocks(firstBlock, secondBlock, blocks) {
 
   if (firstBlock.dataset.icons === secondBlock.dataset.icons) {
 
-    firstBlock.classList.remove('is-flipped')
-    secondBlock.classList.remove('is-flipped')
-
     firstBlock.classList.add('has-match')
     secondBlock.classList.add('has-match')
 
-    let success = new Audio('./sounds/success.mp3');
-    success.play();
+    firstBlock.classList.remove('is-flipped')
+    secondBlock.classList.remove('is-flipped')
+
+    new Audio('./sounds/success.mp3').play();
 
   } else {
 
@@ -173,8 +178,7 @@ function ckeckMatchedBlocks(firstBlock, secondBlock, blocks) {
       secondBlock.classList.remove('is-flipped')
     }, duration)
 
-    let wrong = new Audio('./sounds/wrong.mp3');
-    wrong.play();
+    new Audio('./sounds/wrong.mp3').play();
 
   }
 
@@ -183,8 +187,7 @@ function ckeckMatchedBlocks(firstBlock, secondBlock, blocks) {
     // Pause countdown timer
     pause = true;
 
-    let finish = new Audio('./sounds/finish.mp3');
-    finish.play();
+    new Audio('./sounds/finish.mp3').play();
 
     // Set date in localStorage
     setDateInLocalStorage();
@@ -206,6 +209,10 @@ function ckeckMatchedBlocks(firstBlock, secondBlock, blocks) {
 
     document.querySelector('.info-container .name span').innerHTML = '';
     document.querySelector('.tries span').innerHTML = 0;
+
+    setTimeout(() => {
+      location.reload();
+    }, duration / 10)
   }
 }
 
@@ -215,7 +222,7 @@ function stopClicking() {
   // Add class 'stopClicking' on the container
   blocksContainer.classList.add('stop-clicking');
 
-  setInterval(() => {
+  setTimeout(() => {
     blocksContainer.classList.remove('stop-clicking');
   }, duration)
 }
@@ -311,11 +318,13 @@ document.getElementById('resume').addEventListener('click', function () {
 
 });
 
-// Open alert history
-document.getElementById('history').addEventListener('click', function () {
-  pause = true;
-  document.getElementById('alert-history').classList.add('show')
-  document.querySelector('.alert-history .layout').classList.add('show')
+// Open alert history with click on [ history or allHistory ] element
+[document.getElementById('history'), document.getElementById('allHistory')].forEach(element => {
+  element.addEventListener('click', function () {
+    pause = true;
+    document.getElementById('alert-history').classList.add('show')
+    document.querySelector('.alert-history .layout').classList.add('show')
+  })
 });
 
 // Close alert history
@@ -364,13 +373,19 @@ function setDateInLocalStorage() {
 
   let Users = JSON.parse(localStorage.getItem('users')) || [];
   Users.push(newUser);
-  localStorage.setItem('users', JSON.stringify(Users));
+
+  if (newUser.name != 'Unknown')
+    localStorage.setItem('users', JSON.stringify(Users));
+  setTimeout(() => {
+    location.reload();
+  }, duration / 10)
 }
 
 // Get date in localStorage
 function getDateInLocalStorage() {
   let allUsers = JSON.parse(localStorage.getItem('users'));
   if (allUsers != null) {
+
     allUsers.forEach((user, index) => {
       document.getElementById('tbody').innerHTML +=
         `<div class="user">
