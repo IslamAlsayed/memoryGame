@@ -76,6 +76,8 @@ document.addEventListener('click', (e) => {
     // Insert blocks in container in Html
     insertBlockInContainerHTML();
 
+    hoverOnBlock()
+
     // Remove overlay by click span
     document.querySelector('.control-buttons').remove();
 
@@ -124,6 +126,9 @@ function insertBlockInContainerHTML() {
           flipBlock(block, blocks);
         })
       })
+
+
+      hoverOnBlock()
     })
 }
 
@@ -409,3 +414,18 @@ function getDateInLocalStorage() {
     document.querySelector('.tfoot .reset').classList.add('empty')
   }
 }
+
+
+function hoverOnBlock() {
+  let allBlocks = document.querySelectorAll('.memory-game-blocks .game-block');
+  // document.querySelectorAll('.memory-game-blocks .game-block').forEach(block => {
+  allBlocks.forEach(block => {
+    block.addEventListener('mousemove', (e) => {
+      let x = e.pageX - block.offsetLeft;
+      let y = e.pageY - block.offsetTop;
+      block.style.setProperty('--x', x + 'px');
+      block.style.setProperty('--y', y + 'px');
+    })
+  })
+}
+hoverOnBlock()
