@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" user-scalable="no" />
+    <meta name="theme-color" content="#085899" />
+
     <title>Memory Game</title>
-    <link rel="stylesheet" href="./css/all.min.css" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
 
   <body>
@@ -18,7 +23,9 @@
         </button>
         <div id="levels" class="levels">
           <span class="btnClick" data-level="easy" data-topic="4*4">easy</span>
-          <span class="btnClick" data-level="middle" data-topic="6*6">middle</span>
+          <span class="btnClick" data-level="middle" data-topic="6*6"
+            >middle</span
+          >
           <span class="btnClick" data-level="hard" data-topic="8*8">hard</span>
         </div>
         <span id="start-game" class="start-game btnClick">start game</span>
@@ -57,12 +64,10 @@
             <span>tries</span>
           </div>
           <div id="tbody" class="tbody"></div>
-          <div class="tfoot">
-            <tr>
-              <span class="reset">reset history</span>
-            </tr>
-          </div>
+          <div class="tfoot"></div>
         </div>
+
+        <button class="reset">reset all history</button>
       </div>
     </div>
 
